@@ -4,9 +4,14 @@ from hangman.models import Word, Guess
 
 
 class GuessSerializer(serializers.ModelSerializer):
+    correct = serializers.SerializerMethodField()
+
     class Meta:
         model = Guess
         fields = '__all__'
+
+    def get_correct(self, guess):
+        return guess.is_correct()
 
 
 class WordSerializer(serializers.ModelSerializer):
