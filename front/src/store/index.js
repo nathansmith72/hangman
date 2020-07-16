@@ -1,7 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VuexPersist from "vuex-persist";
 
 Vue.use(Vuex)
+
+const vuexLocalStorage = new VuexPersist({
+  key: 'vuex',
+  storage: window.localStorage,
+})
 
 export default new Vuex.Store ({
     state: {
@@ -32,5 +38,6 @@ export default new Vuex.Store ({
         get_jwt_token: state => {
             return state.jwt_token
         }
-    }
+    },
+    plugins: [vuexLocalStorage.plugin]
 })

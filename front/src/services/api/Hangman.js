@@ -1,5 +1,6 @@
 import axios  from 'axios'
 import store from '../../store/index.js'
+import router from '../../router/index.js'
 
 var api_root_url = 'http://api.hangman.nate-uat.com'
 
@@ -48,7 +49,10 @@ export default {
         ).then(response => {
                 store.commit('set_jwt_token', response.data.token)
             }
-        )
+        ).catch(function() {
+            store.commit('logout')
+            router.push({path: '/login'})
+        })
     },
     getAuthHeaders(){
         return {"Authorization": "jwt " + store.getters.get_jwt_token}
