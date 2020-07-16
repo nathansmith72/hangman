@@ -11,7 +11,7 @@ class GuessSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_correct(self, guess):
-        return guess.is_correct()
+        return guess.is_correct
 
 
 class WordSerializer(serializers.ModelSerializer):
