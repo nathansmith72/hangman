@@ -11,8 +11,18 @@ class Word(models.Model):
 
     @classmethod
     def create_word(cls, user):
+        random_word = cls.get_random_word()
+        while '-' in random_word:
+            random_word = cls.get_random_word()
+        return Word.objects.create(
+            user=user,
+            word=random_word
+        )
+
+    @classmethod
+    def get_random_word(self):
         wordnik_api_key = settings.WORDNIK_API_KEY
-        random_word = requests.get(
+        return requests.get(
             'http://api.wordnik.com/v4/words.json/randomWords'
             '?hasDictionaryDef=true'
             '&minCorpusCount=0'
@@ -21,10 +31,6 @@ class Word(models.Model):
             '&limit=1'
             '&api_key=%s' % wordnik_api_key
         ).json()[0]['word']
-        return Word.objects.create(
-            user=user,
-            word=random_word
-        )
 
 
 class Guess(models.Model):
