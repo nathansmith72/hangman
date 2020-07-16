@@ -12,7 +12,8 @@ class Word(models.Model):
     @classmethod
     def create_word(cls, user):
         random_word = cls.get_random_word()
-        while '-' in random_word:
+        # Make sure word does not have a hyphen or capital letter.
+        while '-' in random_word or any(x.isupper() for x in random_word):
             random_word = cls.get_random_word()
         return Word.objects.create(
             user=user,
