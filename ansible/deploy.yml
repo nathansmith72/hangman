@@ -36,7 +36,7 @@
     - name: build frontend
       command:
         chdir: /home/hangman/hangman/app/front/
-        cmd: npm run build
+        cmd: sudo npm run build
 
   handlers:
     - name: restart nginx
