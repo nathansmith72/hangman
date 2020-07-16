@@ -107,14 +107,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'accounts',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
     'allauth',
     'allauth.account',
     'rest_auth',
-    'rest_auth.registration'
+    'rest_auth.registration',
+    'accounts',
+    'hangman'
 ]
 
 MIDDLEWARE = [

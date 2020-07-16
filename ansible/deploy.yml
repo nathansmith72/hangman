@@ -43,4 +43,4 @@
       shell: sudo systemctl restart nginx
 
     - name: restart gunicorn
-      shell: sudo systemctl restart gunicorn
+      shell: sudo systemctl restart hangman_gunicorn

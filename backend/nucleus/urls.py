@@ -7,5 +7,5 @@ urlpatterns = [
     path('api/accounts/auth/', include('rest_auth.urls')),
     path('api/accounts/auth/refresh_token/', refresh_jwt_token),
     path('api/accounts/registration/', include('rest_auth.registration.urls')),
-    # path('api/hangman/', include('hangman.urls')),
+    path('api/hangman/', include('hangman.urls')),
 ]
