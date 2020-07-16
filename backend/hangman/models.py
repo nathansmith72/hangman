@@ -30,7 +30,14 @@ class Word(models.Model):
 class Guess(models.Model):
     word = models.ForeignKey(Word, on_delete=models.CASCADE)
     guess = models.CharField(max_length=1)
+    correct = models.BooleanField()
 
     @property
     def is_correct(self):
         return self.guess in self.word.word
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.correct = self.is_correct
+        super().save(force_insert, force_update, using, update_fields)
+
+

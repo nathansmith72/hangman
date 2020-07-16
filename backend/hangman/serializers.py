@@ -4,14 +4,9 @@ from hangman.models import Word, Guess
 
 
 class GuessSerializer(serializers.ModelSerializer):
-    correct = serializers.SerializerMethodField()
-
     class Meta:
         model = Guess
         fields = '__all__'
-
-    def get_correct(self, guess):
-        return guess.is_correct
 
 
 class WordSerializer(serializers.ModelSerializer):
@@ -23,6 +18,8 @@ class WordSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_word(self, word):
+        if word.guess_set.filter(correct=False).count() >= 7:
+            return word.word
         obfuscated_word = ''
         guesses = Guess.objects.filter(word=word)
         for letter in word.word:
