@@ -12,9 +12,6 @@ class WordViewset(CreateModelMixin, GenericViewSet):
     queryset = Word.objects.all()
     serializer_class = WordSerializer
 
-    def get_queryset(self):
-        return super().get_queryset().filter(user=self.request.user)
-
     def create(self, request, *args, **kwargs):
         word = Word.create_word(user=self.request.user)
         data = WordSerializer(word).data
@@ -22,10 +19,10 @@ class WordViewset(CreateModelMixin, GenericViewSet):
         return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 
     @action(methods=('post', ), detail=True)
-    def guess_letter(self, request):
+    def guess_letter(self, request, pk):
         letter = request.data.get('letter')
         guess, created = Guess.objects.get_or_create(
-            word=self.get_object(),
+            word=Word.objects.get(pk=pk),
             guess=letter,
         )
         data = WordSerializer(self.get_object()).data
