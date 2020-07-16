@@ -16,7 +16,7 @@ class WordViewset(CreateModelMixin, GenericViewSet):
         return super().get_queryset().filter(user=self.request.user)
 
     def create(self, request, *args, **kwargs):
-        word = Word.objects.create_word(user=self.request.user)
+        word = Word.create_word(user=self.request.user)
         data = WordSerializer(word).data
         headers = self.get_success_headers(data)
         return Response(data, status=status.HTTP_201_CREATED, headers=headers)

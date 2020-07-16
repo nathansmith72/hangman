@@ -9,7 +9,7 @@
     - name: Pull project repo
       git:
         repo: git@bitbucket.org:nathansmith2116/hangman.git
-        dest: /home/hangman/hangman/
+        dest: /home/hangman/hangman/app/
         update: yes
         version: master
       notify:
@@ -35,7 +35,7 @@
 
     - name: build frontend
       command:
-        chdir: /home/hangman/hangman/app/frontend/
+        chdir: /home/hangman/hangman/app/front/
         cmd: npm run build
 
   handlers:
