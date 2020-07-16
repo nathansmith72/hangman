@@ -34,9 +34,9 @@
         virtualenv: /home/hangman/hangman/env
 
     - name: build frontend
-        command:
-          chdir: /home/hangman/hangman/app/frontend/
-          cmd: npm run build
+      command:
+        chdir: /home/hangman/hangman/app/frontend/
+        cmd: npm run build
 
   handlers:
     - name: restart nginx
