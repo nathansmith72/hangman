@@ -1,0 +1,6 @@
+---
+# a unix path-friendly name (IE, no spaces or special characters)
+project_name: hangman
+
+# a private key that has access to the repository URL
+ssh_private_key: ~/.ssh/id_rsa

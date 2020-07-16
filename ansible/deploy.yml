@@ -1,0 +1,46 @@
+---
+- hosts: servers
+  vars_files:
+    - vars.yml
+  gather_facts: false
+
+  tasks:
+
+    - name: Pull project repo
+      git:
+        repo: git@bitbucket.org:nathansmith2116/hangman.git
+        dest: /home/hangman/hangman/
+        update: yes
+        version: master
+      notify:
+        - restart gunicorn
+        - restart nginx
+
+    - name: install python packages
+      pip:
+        requirements: /home/hangman/hangman/app/backend/requirements.txt
+        virtualenv: /home/hangman/hangman/env
+
+    - name: django migrate
+      django_manage:
+        command: migrate
+        app_path: /home/hangman/hangman/app/backend/
+        virtualenv: /home/hangman/hangman/env
+
+    - name: django collectstatic
+      django_manage:
+        command: collectstatic
+        app_path: /home/hangman/hangman/app/backend/
+        virtualenv: /home/hangman/hangman/env
+
+    - name: build frontend
+        command:
+          chdir: /home/hangman/hangman/app/frontend/
+          cmd: npm run build
+
+  handlers:
+    - name: restart nginx
+      shell: sudo systemctl restart nginx
+
+    - name: restart gunicorn
+      shell: sudo systemctl restart gunicorn
