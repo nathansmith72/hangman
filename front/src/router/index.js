@@ -12,7 +12,7 @@ Vue.use(VueRouter)
     name: 'Hangman',
     component: Hangman,
     meta: {
-      requiresAuth: false
+      requiresAuth: true
     }
   },
   {

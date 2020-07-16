@@ -99,6 +99,9 @@
             get_button_letter_image(letter) {
                 return require('../assets/images/hangman/' + letter + '.png')
             }
+        },
+        mounted() {
+            this.get_word()
         }
     }
 </script>

@@ -15,7 +15,7 @@
                             </p>
                             <p>
                                 <label for="password">Password:</label>
-                                <input v-model="password" class="form-control" type="password" autocomplete="off" required id="password">
+                                <input v-on:keyup.enter="login()" v-model="password" class="form-control" type="password" autocomplete="off" required id="password">
                             </p>
                             <div class="alert alert-danger" v-if="error">Incorrect username or password.</div>
                             <button v-on:click="login">Login</button>

@@ -25,3 +25,4 @@ class WordSerializer(serializers.ModelSerializer):
                 obfuscated_word += letter
             else:
                 obfuscated_word += '_'
+        return obfuscated_word

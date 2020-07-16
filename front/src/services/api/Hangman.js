@@ -1,13 +1,13 @@
 import axios  from 'axios'
 import store from '../../store/index.js'
 
-var api_root_url = 'hangman.nate-uat.com'
+var api_root_url = 'http://api.hangman.nate-uat.com'
 
 export default {
     getWord() {
         return this.refresh_jwt_token().then(() => {
-            return axios.get(
-                api_root_url + '/api/hangman/get_word/',{
+            return axios.post(
+                api_root_url + '/api/hangman/words/', {},{
                     headers: this.getAuthHeaders(),
             }).then(response => {
                 return response.data
