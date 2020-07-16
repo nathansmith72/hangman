@@ -18,7 +18,20 @@ export default {
             })
         })
     },
-
+    guessLetter(word_id, letter) {
+        return this.refresh_jwt_token().then(() => {
+            return axios.post(
+                api_root_url + '/api/hangman/words/' + word_id + '/guess_letter/', {letter: letter},{
+                    headers: this.getAuthHeaders(),
+            }).then(response => {
+                return response.data
+            }).catch(error => {
+                if (error.response.status === 401) {
+                    store.commit('logout')
+                }
+            })
+        })
+    },
     login(username, password) {
         return axios.post(
             api_root_url + '/api/accounts/auth/login/',
